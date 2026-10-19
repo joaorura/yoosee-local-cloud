@@ -1,0 +1,130 @@
+# ==============================================================================
+# Home Assistant Lovelace Card Example
+# Yoosee Camera Live Stream (WebRTC via go2rtc) + PTZ Controls Keypad
+# ==============================================================================
+# Requirements:
+# - WebRTC Camera custom card (HACS: AlexxIT/WebRTC)
+# - Buttons configured in configuration.yaml (see configuration_example.yaml)
+# ==============================================================================
+
+type: vertical-stack
+title: Câmera Entrada (Yoosee PTZ)
+cards:
+  # ----------------------------------------------------------------------------
+  # 1. Live Video Feed (Ultra Low Latency WebRTC via go2rtc)
+  # ----------------------------------------------------------------------------
+  - type: custom:webrtc-camera
+    entity: camera.camera_entrada
+    # Alternatively point directly to a go2rtc stream name:
+    # url: entrada
+    poster: image.camera_entrada
+    ui: true
+    shortcuts:
+      - name: Reset
+        icon: mdi:camera-retake
+        target: shell_command.yoosee_ptz
+        data:
+          camera: entrada
+          direction: up
+
+  # ----------------------------------------------------------------------------
+  # 2. PTZ D-Pad Control Grid (3x3 Layout)
+  # ----------------------------------------------------------------------------
+  - type: grid
+    columns: 3
+    square: true
+    cards:
+      # Row 1
+      - type: custom:button-card
+        color_type: blank-card
+      - type: button
+        name: Cima
+        icon: mdi:arrow-up-bold
+        show_name: false
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.entrada_mover_cima
+      - type: custom:button-card
+        color_type: blank-card
+
+      # Row 2
+      - type: button
+        name: Esquerda
+        icon: mdi:arrow-left-bold
+        show_name: false
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.entrada_mover_esquerda
+      - type: button
+        name: Centro / OK
+        icon: mdi:crosshairs-gps
+        show_name: false
+        tap_action:
+          action: none
+      - type: button
+        name: Direita
+        icon: mdi:arrow-right-bold
+        show_name: false
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.entrada_mover_direita
+
+      # Row 3
+      - type: custom:button-card
+        color_type: blank-card
+      - type: button
+        name: Baixo
+        icon: mdi:arrow-down-bold
+        show_name: false
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.entrada_mover_baixo
+      - type: custom:button-card
+        color_type: blank-card
+
+# ==============================================================================
+# Alternative Minimal Native D-Pad (Without custom:button-card requirement):
+# ==============================================================================
+# type: vertical-stack
+# title: Entrada PTZ Controls
+# cards:
+#   - type: horizontal-stack
+#     cards:
+#       - type: button
+#         icon: mdi:arrow-left-bold
+#         tap_action:
+#           action: perform-action
+#           perform_action: button.press
+#           target:
+#             entity_id: button.entrada_mover_esquerda
+#       - type: vertical-stack
+#         cards:
+#           - type: button
+#             icon: mdi:arrow-up-bold
+#             tap_action:
+#               action: perform-action
+#               perform_action: button.press
+#               target:
+#                 entity_id: button.entrada_mover_cima
+#           - type: button
+#             icon: mdi:arrow-down-bold
+#             tap_action:
+#               action: perform-action
+#               perform_action: button.press
+#               target:
+#                 entity_id: button.entrada_mover_baixo
+#       - type: button
+#         icon: mdi:arrow-right-bold
+#         tap_action:
+#           action: perform-action
+#           perform_action: button.press
+#           target:
+#             entity_id: button.entrada_mover_direita

@@ -1,0 +1,126 @@
+# ==============================================================================
+# Home Assistant Configuration Example for Yoosee IP Cameras PTZ Control
+# Include this snippet in your configuration.yaml or in a package file.
+# ==============================================================================
+
+shell_command:
+  yoosee_ptz: "python3 /config/scripts/yoosee_ptz.py {{ camera }} {{ direction }}"
+
+template:
+  - button:
+      # ========================================================================
+      # Camera: Entrada (192.168.2.204)
+      # ========================================================================
+      - name: "Entrada Mover Cima"
+        unique_id: camera_entrada_mover_cima
+        icon: "mdi:arrow-up-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "entrada"
+            direction: "up"
+
+      - name: "Entrada Mover Baixo"
+        unique_id: camera_entrada_mover_baixo
+        icon: "mdi:arrow-down-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "entrada"
+            direction: "down"
+
+      - name: "Entrada Mover Esquerda"
+        unique_id: camera_entrada_mover_esquerda
+        icon: "mdi:arrow-left-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "entrada"
+            direction: "left"
+
+      - name: "Entrada Mover Direita"
+        unique_id: camera_entrada_mover_direita
+        icon: "mdi:arrow-right-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "entrada"
+            direction: "right"
+
+      # ========================================================================
+      # Camera: Lavanderia (192.168.2.201)
+      # ========================================================================
+      - name: "Lavanderia Mover Cima"
+        unique_id: camera_lavanderia_mover_cima
+        icon: "mdi:arrow-up-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "lavanderia"
+            direction: "up"
+
+      - name: "Lavanderia Mover Baixo"
+        unique_id: camera_lavanderia_mover_baixo
+        icon: "mdi:arrow-down-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "lavanderia"
+            direction: "down"
+
+      - name: "Lavanderia Mover Esquerda"
+        unique_id: camera_lavanderia_mover_esquerda
+        icon: "mdi:arrow-left-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "lavanderia"
+            direction: "left"
+
+      - name: "Lavanderia Mover Direita"
+        unique_id: camera_lavanderia_mover_direita
+        icon: "mdi:arrow-right-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "lavanderia"
+            direction: "right"
+
+      # ========================================================================
+      # Camera: Área Gourmet (192.168.2.185)
+      # ========================================================================
+      - name: "Área Gourmet Mover Cima"
+        unique_id: camera_area_gourmet_mover_cima
+        icon: "mdi:arrow-up-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "gourmet"
+            direction: "up"
+
+      - name: "Área Gourmet Mover Baixo"
+        unique_id: camera_area_gourmet_mover_baixo
+        icon: "mdi:arrow-down-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "gourmet"
+            direction: "down"
+
+      - name: "Área Gourmet Mover Esquerda"
+        unique_id: camera_area_gourmet_mover_esquerda
+        icon: "mdi:arrow-left-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "gourmet"
+            direction: "left"
+
+      - name: "Área Gourmet Mover Direita"
+        unique_id: camera_area_gourmet_mover_direita
+        icon: "mdi:arrow-right-bold"
+        press:
+          action: shell_command.yoosee_ptz
+          data:
+            camera: "gourmet"
+            direction: "right"

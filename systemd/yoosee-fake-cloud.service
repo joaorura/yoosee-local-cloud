@@ -1,0 +1,29 @@
+[Unit]
+Description=Yoosee Local Cloud Mock & UDP Keepalive Sink
+Documentation=https://github.com/joaorura/yoosee-local-cloud
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+# Alternatively run as unprivileged user with CAP_NET_BIND_SERVICE to bind ports 80/443:
+# User=yoosee
+# Group=yoosee
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+# Adjust path to your virtualenv or system entrypoint:
+ExecStart=/usr/local/bin/yoosee-fake-cloud --host 0.0.0.0 --http-port 80 --udp-ports 32100 32108 18443 18800 19800 --reply-ack
+
+Restart=always
+RestartSec=5s
+
+# Resource limits & logging
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=yoosee-fake-cloud
+
+[Install]
+WantedBy=multi-user.target
