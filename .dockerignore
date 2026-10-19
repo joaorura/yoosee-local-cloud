@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+venv
+__pycache__
+*.pyc
+.coverage
+.pytest_cache
+.ruff_cache
+docs
+tests
+systemd
+homeassistant
