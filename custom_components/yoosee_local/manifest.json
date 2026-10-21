@@ -1,0 +1,11 @@
+{
+  "domain": "yoosee_local",
+  "name": "Yoosee Local",
+  "codeowners": ["@joaorura"],
+  "documentation": "https://github.com/joaorura/yoosee-local-cloud",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/joaorura/yoosee-local-cloud/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

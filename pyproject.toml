@@ -41,6 +41,7 @@ where = ["src"]
 minversion = "8.0"
 addopts = "-ra -q --cov=yoosee_local"
 testpaths = ["tests"]
+pythonpath = ["src"]
 asyncio_mode = "auto"
 
 [tool.ruff]

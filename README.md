@@ -28,9 +28,10 @@ It enables **100% offline, cloud-independent, and private** operation inside iso
 - [Network & DNS Configuration](#network--dns-configuration)
 - [go2rtc Integration](#go2rtc-integration)
 - [Home Assistant Integration](#home-assistant-integration)
-  - [1. Helper Script](#1-helper-script)
-  - [2. YAML Configuration](#2-yaml-configuration)
-  - [3. Lovelace Dashboard Card](#3-lovelace-dashboard-card)
+  - [1. HACS Custom Integration](#1-hacs-custom-integration)
+  - [2. Home Assistant Supervisor Add-on](#2-home-assistant-supervisor-add-on)
+  - [3. Manual Helper Script & YAML](#3-manual-helper-script--yaml)
+  - [4. Lovelace Dashboard Card](#4-lovelace-dashboard-card)
 - [Tested Hardware & Firmware](#tested-hardware--firmware)
 - [Protocol Reverse Engineering](#protocol-reverse-engineering)
 - [Development & Testing](#development--testing)
@@ -281,7 +282,30 @@ webrtc:
 
 ## Home Assistant Integration
 
-### 1. Helper Script
+### 1. HACS Custom Integration
+
+Install via **HACS** (Home Assistant Community Store) as a Custom Repository:
+1. Open HACS -> Integrations -> Three dots (top right) -> **Custom repositories**.
+2. URL: `https://github.com/joaorura/yoosee-local-cloud`, Category: **Integration**.
+3. Click **Download**, restart Home Assistant.
+4. Go to **Settings** -> **Devices & Services** -> **Add Integration** -> Search for **Yoosee Local**.
+5. Enter the camera IP address and name.
+
+Entities created automatically:
+- **Buttons**: PTZ UP, DOWN, LEFT, RIGHT (`button.<camera>_mover_cima`, etc.)
+- **Switches**: Auto Tracking (`switch.<camera>_rastreamento_automatico`) and White Light (`switch.<camera>_luz_branca`)
+- **Select**: Alarm Sound selector (`select.<camera>_som_de_alarme`) with built-in sounds (`alarm`, `DoorBell`, `Beep`, etc.)
+- **Siren**: Alarm siren trigger (`siren.<camera>_alarme`)
+
+### 2. Home Assistant Supervisor Add-on
+
+Run `yoosee-fake-cloud` directly inside Home Assistant OS:
+1. In Home Assistant, navigate to **Settings** -> **Add-ons** -> **Add-on Store**.
+2. Click three dots (top right) -> **Repositories** -> Add `https://github.com/joaorura/yoosee-local-cloud` (or copy `/yoosee-fake-cloud` into `/addons/yoosee-fake-cloud`).
+3. Click on **Yoosee Fake Cloud** and click **Install**.
+4. Configure options (`http_port: 8080`, `reply_ack: true`) and click **Start**.
+
+### 3. Manual Helper Script & YAML (Legacy Alternative)
 
 Copy `homeassistant/scripts/yoosee_ptz.py` into your Home Assistant `/config/scripts/` directory:
 
@@ -338,7 +362,7 @@ template:
             direction: "right"
 ```
 
-### 3. Lovelace Dashboard Card
+### 4. Lovelace Dashboard Card
 
 Use the example card from [`homeassistant/lovelace_card_example.yaml`](homeassistant/lovelace_card_example.yaml) combining `custom:webrtc-camera` with a 3x3 D-Pad grid:
 

@@ -1,0 +1,23 @@
+name: "Yoosee Fake Cloud"
+slug: "yoosee_fake_cloud"
+version: "1.0.0"
+description: "Servidor local Fake Cloud e sumidouro de telemetria para câmeras Yoosee Anyka"
+url: "https://github.com/joaorura/yoosee-local-cloud"
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+init: false
+host_network: true
+map:
+  - "homeassistant_config:rw"
+options:
+  http_port: 8080
+  reply_ack: true
+  log_level: "info"
+schema:
+  http_port: "port"
+  reply_ack: "bool"
+  log_level: "list(debug|info|warning|error)"

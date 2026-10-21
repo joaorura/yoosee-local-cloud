@@ -1,0 +1,18 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Adicionar Câmera Yoosee Local",
+        "description": "Configure uma câmera Yoosee / Anyka AK3918 para controle RTSP direto sem nuvem.",
+        "data": {
+          "host": "Endereço IP da Câmera",
+          "name": "Nome da Câmera",
+          "port": "Porta RTSP (padrão: 554)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Esta câmera já está cadastrada no Home Assistant."
+    }
+  }
+}
